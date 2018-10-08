@@ -1,0 +1,136 @@
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+   <style>
+    /* Remove the navbar's default rounded borders and increase the bottom margin */ 
+    .navbar {
+      margin-bottom: 50px;
+      border-radius: 0;
+    }
+    
+    /* Remove the jumbotron's default bottom margin */ 
+     .jumbotron {
+      margin-bottom: 0;
+    }
+
+    .carousel-inner > .item > img {
+    margin: 0 auto;
+  }
+   
+    /* Add a gray background color and some padding to the footer */
+    footer {
+      background-color: #f2f2f2;
+      padding: 25px;
+    }
+  </style>
+</head>
+<body>
+
+
+
+{% if user.is_authenticated %}
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/">Bridge</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="/">Home</a></li>
+      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">View <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="/viewtutors/">View Tutors</a></li>
+          <li><a href="/viewnotes/">View Notes</a></li>
+        
+        </ul>
+      </li>
+      <li><a href="/aboutsite/">About Site</a></li>
+      <li><a href="/help/">Help</a></li>
+      
+    </ul>
+
+    <ul class="nav navbar-nav navbar-right">
+      <li><a><span>Welcome {{user.username}}</a></li>
+      <li><a href="/profile/"><span class="glyphicon glyphicon-user"></span></a></li>
+    </ul>
+  </div>
+</nav>
+
+{%else%}
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/">Bridge</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="/">Home</a></li>
+      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">View <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="/viewtutors/">Tutors</a></li>
+          <li><a href="/viewnotes/">Notes</a></li>
+        
+        </ul>
+      </li>
+
+        <li><a href="/aboutsite/">About Site</a></li>
+      <li><a href="/help/">Help</a></li>
+     
+      
+    </ul>
+    
+    <ul class="nav navbar-nav navbar-right">
+
+      
+       <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span>Sign Up </a>
+            <ul class="dropdown-menu">
+          <li><a href="/logs/">Register as Student</a></li>
+          <li><a href="/logt/">Register as Tutor</a></li>
+        
+        </ul>
+
+       </li>
+       
+      <li  class="active"><a href="/login/"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+    </ul>
+  </div>
+</nav>
+{%endif%}
+
+
+{% block content %}
+
+
+  <div class="container">
+  <div class="jumbotron" align="center">
+  	<br><br>
+  <form method="post" style="color:white">
+    {% csrf_token %}
+    Username: {{form.username}}<br>
+    Password: {{form.password}}<br><br>
+   <br>
+    <button class="btn btn-primary">Login</button><br><br>
+     <a href="/password_reset/">Forgot Password?</a>
+  </form>
+</div>
+</div>
+<br><br>
+
+
+
+<style>
+#id_username,#id_password
+{
+	
+background-color: transparent;
+border-style: solid;
+border-width: 0px 0px 1px 0px;
+border-color: white
+}
+
+   .jumbotron {
+      margin-bottom: 0;
+      background-color:#3c754a;
+    }
+ a, a:hover, a:active, a:visited { color: white; }
+</style>
+{% endblock %}
+

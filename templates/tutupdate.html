@@ -1,0 +1,91 @@
+
+{% load static %}
+
+<head>
+  <title>Profile</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+  
+
+
+
+
+
+     <style>
+    /* Remove the navbar's default rounded borders and increase the bottom margin */ 
+    .navbar {
+      margin-bottom: 50px;
+      border-radius: 0;
+    }
+    
+    /* Remove the jumbotron's default bottom margin */ 
+     .jumbotron {
+      background-color:#3c754a
+      margin-bottom: 0;
+    }
+
+    .carousel-inner > .item > img {
+    margin: 0 auto;
+  }
+   
+    /* Add a gray background color and some padding to the footer */
+    footer {
+      background-color: #f2f2f2;
+      padding: 25px;
+    }
+  </style>
+</head>
+<body>
+
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/profile/">{{user.first_name}} {{user.last_name}}</a>
+    </div>
+    <ul class="nav navbar-nav">
+      
+      <li><a href="/changepassword/"><span>Change Password</span></a></li>
+        
+        </ul>
+      </li>
+      
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="/editprofile/">
+              <span class="glyphicon glyphicon-pencil">Edit Details</span>
+          </a>
+      </li>
+      <li><a href="/logout/"><span>Log Out</span></a><li>
+    
+    </ul>
+  </div>
+</nav>
+
+
+<body>
+	<br><br>
+	<div class="container">
+	<div class="jumbotron">
+	<form method="post" enctype="multipart/form-data">
+	{% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Update">
+</form>
+
+</div>
+ </body>
+
+ <style>
+ 	 .jumbotron {
+      margin-bottom: 0;
+      background-color:#3c754a;
+    }
+     a, a:hover, a:active, a:visited { color: white; }
+ </style>
+

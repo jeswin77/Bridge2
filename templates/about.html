@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bridge</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <style>
+    /* Remove the navbar's default rounded borders and increase the bottom margin */ 
+    .navbar {
+      margin-bottom: 50px;
+      border-radius: 0;
+    }
+    
+    /* Remove the jumbotron's default bottom margin */ 
+     .jumbotron {
+      margin-bottom: 0;
+    }
+
+    .carousel-inner > .item > img {
+    margin: 0 auto;
+  }
+   
+    /* Add a gray background color and some padding to the footer */
+    footer {
+      background-color: #f2f2f2;
+      padding: 25px;
+    }
+  </style>
+</head>
+<body>
+
+
+<div class="jumbotron" style="background-color:#3c754a">
+  <div class="container text-center">
+    <h1 style="color:white">Bridge</h1>      
+    <p style="color:white">Find Tutors and Students online....</p>
+  </div>
+</div>
+{% if user.is_authenticated %}
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/">Bridge</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="/">Home</a></li>
+      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">View <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="/viewtutors/">View Tutors</a></li>
+          <li><a href="/viewnotes/">View Notes</a></li>
+        
+        </ul>
+      </li>
+      <li class="active"><a href="/aboutsite/">About Site</a></li>
+      <li><a href="/help/">Help</a></li>
+      
+    </ul>
+
+    <ul class="nav navbar-nav navbar-right">
+      <li><a><span>Welcome {{user.username}}</a></li>
+      <li><a href="/profile/"><span class="glyphicon glyphicon-user"></span></a></li>
+    </ul>
+  </div>
+</nav>
+
+{%else%}
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/">Bridge</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="/">Home</a></li>
+      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">View <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="/viewtutors/">Tutors</a></li>
+          <li><a href="/viewnotes/">Notes</a></li>
+        
+        </ul>
+      </li>
+
+        <li class="active"><a href="/aboutsite/">About Site</a></li>
+      <li><a href="/help/">Help</a></li>
+     
+      
+    </ul>
+    
+    <ul class="nav navbar-nav navbar-right">
+
+      
+       <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span>Sign Up </a>
+            <ul class="dropdown-menu">
+          <li><a href="/logs/">Register as Student</a></li>
+          <li><a href="/logt/">Register as Tutor</a></li>
+        
+        </ul>
+
+       </li>
+       
+      <li><a href="/login/"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+    </ul>
+  </div>
+</nav>
+{%endif%}
+<!------------------------------------------------------------------------>
+<div class="container">
+  <h2><u>Our Motto</u></h2>
+  <h3>''Quality Education is a Community Commitment,It is only the ignorant who despise education.''</h3>
+  <h2><u>Our Aim</u></h2>
+  <h3>For a student,we aim at giving quality tutors near you.<br>For a tutor, we are equipped with enthusiastic students totally waiting for your share of knowledge.<h3>
+     <h2><u>Our Founder</u></h2>
+  <h3>Jeswin Johncy,a passionate Django developer developed this site to favour freshers,to build a bridge between what universities teach and what industry wants from them.<br>Reach Jeswin at jeswinjohncy@gmail.com</h3>
+</div>
+<!------------------------------------------------------------------------>
+<footer class="container-fluid text-center" style="background-color:#2d2b2b">
+  <p></p> 
+
+<h5 style="color:white">
+  Developed by Jeswin Johncy
+</h5>
+
+<h5 style="color:white">
+  <span class="glyphicon glyphicon-envelope"></span> bridgehelpdesker@gmail.com<br>
+  <span class="glyphicon glyphicon-earphone"></span> +91-9400880202
+</h5>
+</footer>
+</body>
+</html>

@@ -1,0 +1,199 @@
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  </head>
+
+
+{% if user.is_authenticated %}
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/">Bridge</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="/">Home</a></li>
+      <li  class="active" class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">View <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li  class="active"><a href="/viewtutors/">View Tutors</a></li>
+          <li><a href="/viewnotes/">View Notes</a></li>
+        
+        </ul>
+      </li>
+      <li><a href="/aboutsite/">About Site</a></li>
+      <li><a href="/help/">Help</a></li>
+      
+    </ul>
+
+    <ul class="nav navbar-nav navbar-right">
+      <li><a><span>Welcome {{user.username}}</a></li>
+      <li><a href="/profile/"><span class="glyphicon glyphicon-user"></span></a></li>
+    </ul>
+  </div>
+</nav>
+
+{%else%}
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/">Bridge</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="/">Home</a></li>
+      <li  class="active" class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">View <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li  class="active"><a href="/viewtutors/">Tutors</a></li>
+          <li><a href="/viewnotes/">Notes</a></li>
+        
+        </ul>
+      </li>
+
+        <li><a href="/aboutsite/">About Site</a></li>
+      <li><a href="/help/">Help</a></li>
+     
+      
+    </ul>
+    
+    <ul class="nav navbar-nav navbar-right">
+
+      
+       <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span>Sign Up </a>
+            <ul class="dropdown-menu">
+          <li><a href="/logs/">Register as Student</a></li>
+          <li><a href="/logt/">Register as Tutor</a></li>
+        
+        </ul>
+
+       </li>
+       
+      <li><a href="/login/"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+    </ul>
+  </div>
+</nav>
+{%endif%}
+
+<br>
+
+<div class="container">
+<div class="jumbotron">
+	<div id="pt">
+		
+<img src="{{i.tut_pic.url}}" style="max-width=50px;max-height=50px"></a><br>
+	</div>
+	
+	<div id="pt" class="details">
+	<h2>{{i.user_data.first_name}} 
+	{{i.user_data.last_name}}</h2><br><br>
+
+	Course Offered:
+		 {{i.tut_course}}<br
+		
+			
+			<br>
+	Type:{{i.tut_type}}<br>
+	Locality:{{i.tut_locality}}<br>
+	Rate:{{i.tut_rate}}<br>
+	Rating:{{i.tut_rating}}<br><br>
+	Upvotes:{{total_likes}}<br>
+	Downvotes:{{total_dislikes}}<br>
+
+	Status:{{i.tut_status}}
+	
+	</div>
+
+	<br>
+	
+	<br>
+
+
+	<hr>
+	<div id="btns">
+	{%if user.is_authenticated %}
+
+			
+				<form action="{% url 'connect_to_tutor' %}" method="post">
+					{%csrf_token%}
+  					<button class="btn btn-info" name="tutor_id" value={{i.id}}>Connect to this Tutor</button>
+  				</form>
+
+			
+			<hr>
+		<div style="display:inline-block;">
+		<form action="{% url 'like_tutor' %}" method="post">
+			{%csrf_token%}
+		
+				<button type="submit" name="tutor_id" value={{i.id}} class="btn btn-primary"><span class="glyphicon glyphicon-thumbs-up">Upvote</span></button>
+
+
+		</form>
+		</div>
+
+		<div style="display:inline-block;">
+		<form action="{% url 'dislike_tutor' %}" method="post">
+			{%csrf_token%}
+
+		
+				<button type="submit" name="tutor_id" align="right" value={{i.id}} class="btn btn-danger"><span class="glyphicon glyphicon-thumbs-down">Downvote</span></button>
+		</form>
+		</div>
+
+		<hr>
+		
+		<form action="." method="post">
+		{%csrf_token%}
+		<p style="color:white">Add a review</p>
+		{{comment_form.content}}
+		<button class="btn btn-info">submit</button>
+	</form>
+</p>
+	
+			
+	{%else%}
+		<p id="white">login to Connect,add votes and reviews</p>
+		<a href="/login/">Login Now</a>
+
+	{%endif%}
+
+</div>
+	<hr>
+
+
+	<div id="cmnt">
+	{%if comment%}
+	{%for i in comment%}
+		<blockquote class="blockquote" id="white">
+  			<p class="mb-0" id="white">{{i.content}}</p>
+  		<footer class="blockquote-footer" id="white">by <cite title="Source Title">{{i.user|capfirst}}</cite></footer>
+		</blockquote>
+
+
+	{%endfor%}
+	{%else%}
+		<h3 id="white">No reviews till now!</h3>
+	{%endif%}
+	</div>
+
+	<hr>
+	
+</div>
+
+</div>
+
+
+<style>
+	#pt{
+		float:left;
+		width:50%;
+		
+	}
+	 	 .jumbotron {
+      margin-bottom: 0;
+      background-color:#3c754a;
+    }
+    .details{
+    	padding-left: 50px;
+    	 color: white;	
+    }
+     a, a:hover, a:active, a:visited ,#white{ color: white; }
+</style>

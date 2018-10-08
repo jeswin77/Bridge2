@@ -1,0 +1,163 @@
+{% load static %}
+
+<head>
+  <title>Profile</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+	
+
+
+
+
+
+     <style>
+    /* Remove the navbar's default rounded borders and increase the bottom margin */ 
+    .navbar {
+      margin-bottom: 50px;
+      border-radius: 0;
+    }
+    
+    /* Remove the jumbotron's default bottom margin */ 
+     .jumbotron {
+      background-color:#3c754a
+      margin-bottom: 0;
+    }
+
+    .carousel-inner > .item > img {
+    margin: 0 auto;
+  }
+   
+    /* Add a gray background color and some padding to the footer */
+    footer {
+      background-color: #f2f2f2;
+      padding: 25px;
+    }
+  </style>
+</head>
+<body>
+
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand">{{user.first_name}} {{user.last_name}}</a>
+    </div>
+    <ul class="nav navbar-nav">
+      
+      <li><a href="/changepassword/"><span>Change Password</span></a></li>
+      <li><a href="/tutornotes/"><span>Upload Notes</span></a></li>
+      <li><a href="/addad/"><span>Add advertisement</span></a></li>
+        
+        </ul>
+      </li>
+      
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="/editprofile/">
+              <span class="glyphicon glyphicon-pencil">Edit Details</span>
+          </a>
+      </li>
+      <li><a href="/logout/"><span>Log Out</span></a><li>
+    
+    </ul>
+  </div>
+</nav>
+
+<div class="container">
+<div class="jumbotron">
+    <div  style="float:left;margin:45;">
+     <img src="{{tut.tut_pic.url}}" style="max-width=50px;max-height=50px"></a><br>
+
+    
+    </div>
+    <div style="float:left;margin:10;">
+    <b><h2>{{user.first_name}} {{user.last_name}}</h2></b><br>
+    {{user.email}}<br>
+    {{user.id}}<br>
+    Joined @ {{user.date_joined}}<br>
+    you last logged at {{user.last_login}}<br>
+  
+Rate:{{tut.tut_rate}}<br>
+
+
+  {{i.category_name}}<br>
+
+
+
+Rating:{{tut.tut_rating}}<br>
+locality:{{tut.tut_locality}}<br>
+Type:{{tut.tut_type}}
+  </div>
+<p align="right"><a href="/editprofiletutor/">
+              <span class="glyphicon glyphicon-pencil" align="right"></span>
+          </a></p>
+
+
+  <br>
+  <hr>
+  {%if map%}
+  <b>Students currently signed up for the offered courses</b><br>
+  <table>
+    <tr>
+    <th>Student</th>
+    <th>Course</th>
+    <th>Remove student</th>
+    </tr>
+  
+  {%for i in map%}
+  <tr>
+    <td>{{i.student}}</td>
+    <td>{{i.course}}</td>
+    <td><a href="?stud={{i.student}}">Remove {{i.student}}</td>
+  </tr>
+  {%endfor%}
+
+</table>
+  {%else%}
+  <h3>Currently no students are connected with you</h3>
+  {%endif%}
+<hr>
+
+{%if ads%}
+ <table>
+    <tr>
+    <th>Advertisement title</th>
+    <th>Advertisement Description</th>
+    <th>Remove Advertisement</th>
+    </tr>
+  
+  {%for i in ads%}
+  <tr>
+    <td>{{i.ad_title}}</td>
+    <td>{{i.ad_desc}}</td>
+
+  </tr>
+  {%endfor%}
+
+</table>
+   <a href="?ad=1">Remove all ads</a>
+
+   {%else%}
+   <h3>You have no ads to display</h3>
+{%endif%}
+<hr>
+</div>
+
+</div>
+
+<style>
+  table,tr{
+
+   width:100%;
+}
+   .jumbotron {
+      margin-bottom: 0;
+      background-color:#3c754a;
+    }
+    a, a:hover, a:active, a:visited { color: white; }
+</style>

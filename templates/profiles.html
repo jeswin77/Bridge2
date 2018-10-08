@@ -1,0 +1,109 @@
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand">{{user.first_name}} {{user.last_name}}</a>
+    </div>
+    <ul class="nav navbar-nav">
+      
+      <li><a href="/changepassword/"><span>Change Password</span></a></li>
+        
+        </ul>
+      </li>
+      
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="/editprofile/">
+              <span class="glyphicon glyphicon-pencil">Edit Details</span>
+          </a>
+      </li>
+      <li><a href="/logout/"><span>Log Out</span></a><li>
+    
+    </ul>
+  </div>
+</nav>
+
+
+
+<div class="container">
+  <div class="jumbotron">
+    <div  style="float:left;margin:10;">
+    <img src="{{stud.pic.url}}">
+    </div>
+    <div style="float:left;margin:10;">
+   <p id="white"> {{user.username}}<br>
+		{{user.email}}<br>
+    {{user.id}}<br>
+    Joined @ {{user.date_joined}}<br>
+    you last logged at {{user.last_login}}<br></p>
+    </div><br>
+    
+
+	
+
+
+  <hr>
+  
+
+<p id="white">Course:{{stud.stud_course}}<br>
+Locality:{{stud.stud_locality}}<br></p>
+
+<p align="right"><a href="/editprofilestudent/">
+              <span class="glyphicon glyphicon-pencil" align="right"></span>
+          </a></p>
+  <hr>
+  {%if map%}
+
+<b>Connected Tutors</b>
+
+<table>
+    <tr>
+    <th>Tutor</th>
+    <th>Course</th>
+    <th>Remove Tutor</th>
+    </tr>
+  {%for i in map%}
+  <tr>
+    <td>{{i.tutor}}</td>
+    <td>{{i.course}}</td>
+    <td><a href="?tut={{i.tutor}}">Remove {{i.tutor}}</td>
+  </tr>
+  {%endfor%}
+</table>
+
+{%else%}
+<h3 id="white">You have no current connections with tutors!
+  <hr>
+
+{%endif%}
+
+</div>
+</div>
+</body>
+
+<style>
+  table,tr{
+
+   width:100%;
+}
+ .jumbotron {
+      margin-bottom: 0;
+      background-color:#3c754a;
+    }
+  #white{
+    color:white;
+    font-size:16;
+  }
+  body
+  {
+    background-image: 'wall.jpeg'
+  }
+</style>

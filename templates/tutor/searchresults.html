@@ -1,0 +1,370 @@
+
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  </head>
+
+{%if products%}
+
+
+{% if user.is_authenticated %}
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/">Bridge</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="/">Home</a></li>
+      <li  class="active" class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">View <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="/viewtutors/">View Tutors</a></li>
+          <li class="active"><a href="/viewnotes/">View Notes</a></li>
+        
+        </ul>
+      </li>
+      <li><a href="/aboutsite/">About Site</a></li>
+      <li><a href="/help/">Help</a></li>
+      
+    </ul>
+
+    <ul class="nav navbar-nav navbar-right">
+      <li><a><span>Welcome {{user.username}}</a></li>
+      <li><a href="/profile/"><span class="glyphicon glyphicon-user"></span></a></li>
+    </ul>
+  </div>
+</nav>
+
+{%else%}
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/">Bridge</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="/">Home</a></li>
+      <li  class="active" class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">View <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="/viewtutors/">Tutors</a></li>
+          <li  class="active"><a href="/viewnotes/">Notes</a></li>
+        
+        </ul>
+      </li>
+
+        <li><a href="/aboutsite/">About Site</a></li>
+      <li><a href="/help/">Help</a></li>
+     
+      
+    </ul>
+    
+    <ul class="nav navbar-nav navbar-right">
+
+      
+       <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span>Sign Up </a>
+            <ul class="dropdown-menu">
+          <li><a href="/logs/">Register as Student</a></li>
+          <li><a href="/logt/">Register as Tutor</a></li>
+        
+        </ul>
+
+       </li>
+       
+      <li><a href="/login/"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+    </ul>
+  </div>
+</nav>
+{%endif%}
+<div class="container">
+  <div class="jumbotron">
+{%for i in products%}
+
+      
+      <div id="pt" style="width:200px">
+        
+             <a href="/tutorprofile/{{i.user_data_id}}"><img src="{{i.tut_pic.url}}" class="img-responsive image-resize"></a>
+     
+       
+        </div>
+      <div id="pt">
+    <p style="color:white;font-size:16">      
+            {{i.user_data.first_name}} 
+             {{i.user_data.last_name}}<br>
+
+
+             {%for j in i.tut_course.all%}
+               {{j.category_name}}<br>
+            {%endfor%}
+      
+             
+           type:{{i.tut_type}}<br>
+           Locality:{{i.tut_locality}}<br>
+           Rate:{{i.tut_rate}}<br>
+           Rating:{{i.tut_rating}}<br>
+        </div> 
+      
+ </p>       
+     <hr> 
+{%endfor%}
+</div>
+
+
+</div>
+
+<style>
+ 
+.image-resize{
+  max-width: 250px;
+  max-height: 250px;
+  
+ 
+  
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+  
+
+}
+
+
+  
+}
+#pt {
+  
+  float:left;
+
+}
+   .jumbotron {
+      margin-bottom: 0;
+      background-color:#3c754a;
+    }
+
+</style>
+
+
+{%else%}
+
+
+  <div class="jumbotron">
+    {%if user.is_authenticated %}
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/">Bridge</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="/">Home</a></li>
+
+      
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a><span>Welcome {{user.username}}</a></li>
+      <li><a href="/profile/"><span class="glyphicon glyphicon-user"></span></a></li>
+    </ul>
+  </div>
+</nav>
+{%else%}
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/">Bridge</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="/">Home</a></li>
+     
+      
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+     <li><a href="/login/"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+    </ul>
+  </div>
+</nav>
+{%endif%}
+
+<div class="container">
+
+
+{%if notes%}
+{%for i in notes%}
+<b id="white">{{i.title}}</b> <br><p id="white">by {{i.tutor.user_data.first_name}} {{i.tutor.user_data.last_name}}</p><br>
+
+{% if i.tut_notes_type == 'paid' %}
+  <div class='pm-button' align="right"><a href='https://www.payumoney.com/paybypayumoney/#/DF5AE88AD88178448797D0AA2B14F8DD'><img src='https://www.payumoney.com/media/images/payby_payumoney/new_buttons/11.png' /></a></div> 
+{% else %}
+  <p align="right" id="white" style="font-size:200%">Free</p>
+  <a href={{i.tut_notes.url}}><p id="white"><span class="glyphicon glyphicon-download">Download Note</p></a><br>
+{% endif %}
+<p id="white">uploaded on:{{i.timestamp}}</p>
+
+<hr>
+{%endfor%}
+{%endif%}
+
+
+
+
+
+{%if tutors_firstname%}
+{%for i in tutors_firstname%}
+
+
+      
+      <div id="pt" style="width:200px">
+        
+             <a href="/tutorprofile/{{i.user_data_id}}"><img src="{{i.tut_pic.url}}" class="img-responsive image-resize"></a>
+     
+       
+        </div>
+      <div id="pt">
+          
+           <p id="white"> {{i.user_data.first_name}} 
+             {{i.user_data.last_name}}<br>
+
+
+             {%for j in i.tut_course.all%}
+               {{j.category_name}}<br>
+            {%endfor%}
+      
+             
+           type:{{i.tut_type}}<br>
+           Locality:{{i.tut_locality}}<br>
+           Rate:{{i.tut_rate}}<br>
+           Rating:{{i.tut_rating}}<br></p>
+        </div> 
+      
+    <hr> 
+{%endfor%}
+{%endif%}
+
+
+
+
+{%if tutors_lastname%}
+{%for i in tutors_lastname%}
+
+
+      
+      <div id="pt" style="width:200px">
+        
+             <a href="/tutorprofile/{{i.user_data_id}}"><img src="{{i.tut_pic.url}}" class="img-responsive image-resize"></a>
+     
+       
+        </div>
+      <div id="pt">
+          
+          <p id="white">  {{i.user_data.first_name}} 
+             {{i.user_data.last_name}}<br>
+
+
+         Course:{{i.tut_course}}
+      
+             
+           type:{{i.tut_type}}<br>
+           Locality:{{i.tut_locality}}<br>
+           Rate:{{i.tut_rate}}<br>
+           Rating:{{i.tut_rating}}<br>
+        </div> 
+      </p>
+     <hr>
+{%endfor%}
+{%endif%}
+
+
+
+{%if courses%}
+{%for i in courses%}
+<a href="?course={{i.category_name}}">{{i.category_name}} Course
+<br>
+<hr>
+{%endfor%}
+{%endif%}
+
+{%if free%}
+{%for i in free%}
+<h3 id="white">{{i.title}}</h3> 
+<b id="white">by {{i.tutor.user_data.first_name}} {{i.tutor.user_data.last_name}}</b><br>
+
+{% if i.tut_notes_type == 'paid' %}
+  <div class='pm-button' align="right"><a href='https://www.payumoney.com/paybypayumoney/#/DF5AE88AD88178448797D0AA2B14F8DD'><img src='https://www.payumoney.com/media/images/payby_payumoney/new_buttons/11.png' /></a></div> 
+{% else %}
+  <p align="right" id="white" style="font-size:200%">Free</p>
+  <a href={{i.tut_notes.url}}><span class="glyphicon glyphicon-download"></span>Download Note</a><br>
+{% endif %}
+<b id="white">
+uploaded on:{{i.timestamp}}</b>
+
+<hr>
+{%endfor%}
+{%endif%}
+
+{%if tutorsatlocality%}
+  {%for i in tutorsatlocality%}
+     
+      <div id="pt" style="width:200px">
+        
+             <a href="/tutorprofile/{{i.user_data_id}}"><img src="{{i.tut_pic.url}}" class="img-responsive image-resize"></a>
+     
+       
+        </div>
+      <div id="pt">
+          
+            <p id="white">{{i.user_data.first_name}} 
+             {{i.user_data.last_name}}<br>
+
+             Course:{{i.tut_course}}
+            <br>
+             
+           type:{{i.tut_type}}<br>
+           Locality:{{i.tut_locality}}<br>
+           Rate:{{i.tut_rate}}<br>
+           Rating:{{i.tut_rating}}<br></p>
+        </div> 
+      
+        
+     <hr> 
+
+  {%endfor%}
+{%endif%}
+
+{%if searchresult == 0 %}
+  <h2 id="white">No results to display!</h2>
+{%endif%}
+</div>
+
+<style>
+ 
+.image-resize{
+  max-width: 250px;
+  max-height: 250px;
+  
+ 
+  
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+  
+
+}
+
+
+  
+}
+#pt {
+  
+  float:left;
+  color:white;
+}
+
+   .jumbotron {
+      margin-bottom: 0;
+      background-color:#3c754a;
+    }
+    #white
+    {
+      color:white;
+      font-size: 16;
+    }
+    a, a:hover, a:active, a:visited { color: white; }
+ </style>
+
+
+{%endif%}

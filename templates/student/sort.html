@@ -1,0 +1,153 @@
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  </head>
+{% if user.is_authenticated %}
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/">Bridge</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="/">Home</a></li>
+      <li  class="active" class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">View <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="active"><a href="/viewtutors/">View Tutors</a></li>
+          <li><a href="/viewnotes/">View Notes</a></li>
+        
+        </ul>
+      </li>
+      <li><a href="/aboutsite/">About Site</a></li>
+      <li><a href="/help/">Help</a></li>
+      
+    </ul>
+
+    <ul class="nav navbar-nav navbar-right">
+      <li><a><span>Welcome {{user.username}}</a></li>
+      <li><a href="/profile/"><span class="glyphicon glyphicon-user"></span></a></li>
+    </ul>
+  </div>
+</nav>
+
+{%else%}
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/">Bridge</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="/">Home</a></li>
+      <li  class="active" class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">View <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li  class="active"><a href="/viewtutors/">Tutors</a></li>
+          <li><a href="/viewnotes/">Notes</a></li>
+        
+        </ul>
+      </li>
+
+        <li><a href="/aboutsite/">About Site</a></li>
+      <li><a href="/help/">Help</a></li>
+     
+      
+    </ul>
+    
+    <ul class="nav navbar-nav navbar-right">
+
+      
+       <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span>Sign Up </a>
+            <ul class="dropdown-menu">
+          <li><a href="/logs/">Register as Student</a></li>
+          <li><a href="/logt/">Register as Tutor</a></li>
+        
+        </ul>
+
+       </li>
+       
+      <li><a href="/login/"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+    </ul>
+  </div>
+</nav>
+{%endif%}
+
+<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">sort<span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          
+          <li><a href="?order=rate&page={{ page }}">by rate</a></li>
+          <li><a href="?order=rating&page={{ page }}">by rating</a></li>
+        
+        </ul>
+      </li>
+
+<div class="container">
+
+
+
+<br>
+
+  <div class="jumbotron">
+{%for i in products%}
+
+      
+      <div id="pt" style="width:200px">
+        
+	           <a href="/tutorprofile/{{i.user_data_id}}"><img src="{{i.tut_pic.url}}" class="img-responsive image-resize"></a>
+     
+       
+        </div>
+      <div id="pt">
+    <p style="color:white;font-size:16">      
+            {{i.user_data.first_name}} 
+	           {{i.user_data.last_name}}<br>
+
+
+	       	   {%for j in i.tut_course.all%}
+			         {{j.category_name}}<br>
+		        {%endfor%}
+			
+			       
+	         type:{{i.tut_type}}<br>
+	         Locality:{{i.tut_locality}}<br>
+	         Rate:{{i.tut_rate}}<br>
+	         Rating:{{i.tut_rating}}<br>
+        </div> 
+      
+ </p>       
+     <hr> 
+{%endfor%}
+</div>
+
+
+</div>
+
+<style>
+ 
+.image-resize{
+  max-width: 250px;
+  max-height: 250px;
+  
+ 
+  
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+  
+
+}
+
+
+  
+}
+#pt {
+  
+  float:left;
+
+}
+   .jumbotron {
+      margin-bottom: 0;
+      background-color:#3c754a;
+    }
+
+</style>
+
+
