@@ -71,20 +71,30 @@
 </nav>
 {%endif%}
 
-<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">sort<span class="caret"></span></a>
+
+<div class="container">
+
+  <nav class="navbar navbar-inverse" style="width:90px">
+  <div class="container-fluid">
+    
+    <ul class="nav navbar-nav">
+
+      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Sort <span class="caret"></span></a>
         <ul class="dropdown-menu">
+
           
-          <li><a href="?order=rate&page={{ page }}">by rate</a></li>
-          <li><a href="?order=rating&page={{ page }}">by rating</a></li>
+          <li><a href="?order=rate&page={{ page }}">By Rate</a></li>
+          <li><a href="?order=rating&page={{ page }}">By Rating</a></li>
         
         </ul>
       </li>
 
-<div class="container">
+  </div>
+</nav>
 
 
 
-<br>
+
 
   <div class="jumbotron">
 {%for i in products%}
@@ -135,7 +145,7 @@
 
 }
 
-
+ a, a:hover, a:active, a:visited { color: white; }
   
 }
 #pt {

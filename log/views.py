@@ -206,14 +206,7 @@ class CourseSelect(CreateView):
   success_url="success!!"
 
 #--------------------------------------------------------------------------------------------------------
-'''class TutorUpdate(UpdateView):
-    model = Tutor
-    fields = ['address','tut_rate','tut_type','Course','pic']
-    template_name='tutupdate.html'
-    def get_object(self,queryset=None):
-      return self.request.user
-    def get_success_url(self):
-      return '/profile/'''
+
 #-----------------------------------------------------------------------------
 
 class TutorUpdate(UpdateView):
@@ -263,23 +256,6 @@ def ChangePassword(request):
     return render(request,'changepassword.html',context)
 
 #---------------------------------------------------------------------------------------------------------
-'''def password_reset(request,recvr_mail):
-  if request.method=='POST':
-    form=PasswordChangeForm(request.user,request.POST)
-    if form.is_valid():
-      form.save()
-      return redirect('/profile')
-  else:
-    form=PasswordChangeForm(user=request.user)
-    context={'form':form}
-    return render(request,'changepassword.html',context
-  template_name="password_reset_form.html"
-  body="Follow the link to reset password"
-  subject="password reset OTP"
-  rm=recvr_mail
-
-  email = EmailMessage('Subject', 'Body', to=[rm])
-  email.send()'''
 
 #---------------------------------------------------------------------------------------------------------
 
@@ -301,53 +277,4 @@ class userselect(TemplateView):
 
 
 
-
-
-
-def qry(request):
-  pdtl=[]
-  products = Product.objects.all()
-  order = request.GET.get('order','rel') 
-  dict1={'price':'pdt_rate','-price':'-pdt_rate','rel':'pdt_rel1'} 
-  ord1=dict1[order]# Set 'name' as a default value
-  products = products.order_by(ord1)
-  for i in products:
-    if i.pdt_qty>=1:
-      pdtl.append(i)
-    else:
-      pass
-
-  return render(request, 'wel.html', {'products': pdtl})
-    
-
-
-def ppro(request,expp,tname):
-    
-    chpt = Product.objects.get(pdt_id=expp)
-    current_user= request.user
-
-    need_qty=request.POST.get('quantity')
-
-    if need_qty:
-      request.session['nq']=need_qty
-    else:
-      pass
-
-    context={'pt':chpt,'user':current_user}
-    #return render(request,tname,context)
-    return render(tname, context)
-
-def ppro1(request,expp,tname):
-  if "nq" in request.session:
-    result = request.session["nq"]
-  else:
-    result = False
-  if result:
-    need_quantity=request.session.get('nq')
-  
-  chpt = Product.objects.get(pdt_id=expp)
-  chpt.pdt_qty-=int(need_quantity)
-
-  current_user= request.user
-  current_userid= request.user.id
 
